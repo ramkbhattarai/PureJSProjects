@@ -1,0 +1,28 @@
+/* css variables are defined in root like this */
+
+:root{
+    --base:green;
+    --blur:10px;
+    --spacing:10px;
+
+}
+
+/* to use the variables defined above we do like this */
+
+img{
+    padding: var(--spacing);
+    background: var(--base);
+    filter: blur(var(--blur));
+}
+
+body{
+    text-align: center;
+    background: blue;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+}
+.controls{
+    margin-bottom: 50px;
+}
