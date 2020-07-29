@@ -67,17 +67,21 @@
             margin: 0;
             width: 100%;
             transition: transform 0.5s;
-            border: 1px solid red;
             flex: 1 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        .panel.open{
+            flex: 5;
+            font-size: 40px;
+        }
 
         .panel > *:first-child{
             transform: translateY(-100%);
         }
-        .panel .open-active> *:first-child{
+        
+        .panel.open-active > *:first-child{
             transform: translateY(0);
         }
 
@@ -85,7 +89,7 @@
             transform: translateY(100%);
         }
 
-         .panel .open-active> *:last-child{
+        .panel.open-active > *:last-child{
             transform: translateY(0);
         }
 
@@ -100,10 +104,7 @@
             font-size: 4em;
         }
 
-        .panel .open{
-            flex: 5;
-            font-size: 40px;
-        }
+       
 
         .cta{
             color: white;
@@ -141,5 +142,21 @@
             <p>Move</p>
         </div>
     </div>
+    <script>
+        const panels = document.querySelectorAll('.panel');
+        function toggleOpen(){
+            this.classList.toggle('open');
+        }
+
+        function toggleActiveOpen(e){
+            
+            if(e.propertyName.includes("flex")){
+                console.log('inside');
+                this.classList.toggle('open-active');
+            }
+        }
+        panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+        panels.forEach(panel => panel.addEventListener('transitionend', toggleActiveOpen));
+    </script>
 </body>
 </html>
