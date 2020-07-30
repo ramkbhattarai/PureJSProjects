@@ -27,6 +27,9 @@
             margin-left: 620px;
             list-style:outside none none;
         }
+        .hl{
+            color: red;
+        }
       
     </style>
     <form class="search-form">
@@ -62,10 +65,10 @@
             const matches = findMatches(this.value, cities);
             // console.log(matches);
             const html = matches.map(place => {
-                const regex = new RegExp(word, 'gi');
-                const cityName = place.city.replace(regex, `<span class="hl">${this.vaue}</span>`);
-                const stateName = place.state.replace(regex, `<span class="hl">${this.vaue}</span>`);
-
+                const regex = new RegExp(this.value, 'gi');
+                const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+                const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+               
                 return `
                     <li>
                        <span class="name">${cityName}, ${stateName}</span>
