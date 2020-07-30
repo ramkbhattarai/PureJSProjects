@@ -7,7 +7,27 @@
 </head>
 <body>
     <style>
-        
+        *{
+            background-color: aqua;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .search-form{
+            text-align: center;
+            align-items: center;
+            margin-top: 15%;
+        }
+        .search{
+            border: 1px solid black;
+        }
+        .suggestions > *{
+            border: 1px solid black;
+            width: 200px;
+            margin-left: 620px;
+            list-style:outside none none;
+        }
+      
     </style>
     <form class="search-form">
         <input type="text" class="search" placeholder="City or State">
@@ -17,6 +37,51 @@
         </ul>
     </form>
     <script>
+        const endPoint ='https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+        const cities = [];
+        fetch(endPoint)
+        .then(blob => blob.json())
+        .then(data => cities.push(...data));
+        // here we got the list of the cities
+        // now we have to write the function that will show only the cities that matches the words typed
+        // in the search box
+
+        function findMatches(word, cities){
+            return cities.filter(place => {
+                const regex = new RegExp(word, 'gi');// here g --> global and i--> caseInsensitive
+                return place.city.match(regex) || place.state.match(regex);
+            });
+        }
+
+        //now we have selected only the states and cities form the list
+        // we need to display the
+        function numberWithCommas(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+        function display(){
+            const matches = findMatches(this.value, cities);
+            // console.log(matches);
+            const html = matches.map(place => {
+                const regex = new RegExp(word, 'gi');
+                const cityName = place.city.replace(regex, `<span class="hl">${this.vaue}</span>`);
+                const stateName = place.state.replace(regex, `<span class="hl">${this.vaue}</span>`);
+
+                return `
+                    <li>
+                       <span class="name">${cityName}, ${stateName}</span>
+                       <span class="population">${numberWithCommas(place.population)}</span>
+                    </li>
+                `;
+            }).join('');
+            suggestions.innerHTML = html;
+        }
+
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+        searchInput.addEventListener('change',display);
+        searchInput.addEventListener('keyup', display);
+
+    
 
     </script>
 </body>
