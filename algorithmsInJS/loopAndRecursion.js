@@ -93,4 +93,62 @@ function joinElements(array, joinString){
     }
     return recurse1(0,'');
 }
-console.log(joinElements(['s','cr','t','cod',':) :)'], 'e'));
+//  console.log(joinElements(['s','cr','t','cod',':) :)'], 'e'));
+
+function joinElementsIterative(array, joinElements){
+    let result = '';
+    for (let index = 0; index < array.length; index++) {
+         result += array[index];
+         if(index !== array.length -1){
+
+             result += joinElements;
+         }
+
+    }
+    return result;
+}
+//  console.log(joinElementsIterative(['s','cr','t','cod',':) :)'], 'e'));
+
+function factorialRecursive(n){
+    let chache = {};
+    if(n in chache){
+        return chache[n];
+    }else{
+        if(n <= 1) {
+            return 1;
+        }else{
+            let result = n * factorialRecursive(n - 1);
+            chache[n] = result;
+            return result;
+        }
+    }
+}
+// console.log(factorialRecursive(0));
+
+// second approach 
+
+const memoize = (fn) => {
+    let cache = {};
+    return (...args) => {
+        let n = args[0];
+        if(n in cache){
+            return cache[n];
+        }else{
+            let result = fn(n);
+            cache[n] = result;
+            return result;
+        }
+    };
+};
+
+const factorialNew = memoize(
+    x => {
+        if(x <= 1 ) {
+            return 1;
+        }else{
+            return x * factorialNew(x -1);
+        }
+    }
+);
+
+console.log(factorialNew(5));
