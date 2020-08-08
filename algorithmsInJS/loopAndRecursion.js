@@ -226,3 +226,25 @@ function flattenArray(arr){
     return flattenedArray;
 }
 // console.log(flattenArray([1,2,[3,4],[5,6,[7,8,[9]]]]));
+
+function fileFinder(directives, targetFiles){
+    for(let key in directives){
+        if (key === targetFiles || fileFinder(directives[key], targetFiles)){
+            return true;
+        }
+    }
+    return false;
+}
+
+function pathFinder(directives, targetFiles){
+    for (let key in directives) {
+        if (key === targetFiles) {
+            return '/' + targetFiles;
+        }
+        let subDir = pathFinder(directives[key],targetFiles);
+        if(subDir !== null){
+            return key + subDir;
+        }
+    }
+    return null;
+}
