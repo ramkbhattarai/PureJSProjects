@@ -165,4 +165,31 @@ function lucasNumber(n){
     return result;
 }
 
-console.log(lucasNumber(5));
+// console.log(lucasNumber(5));
+
+function lucasNumberIter(n){
+    let array = [2,1];
+    if (n === 0) return 2;
+    if (n === 1) return 1;
+    for (let index = 2; index <= n; index++) {
+        let x = array[index -1] + array[index -2];
+        array.push(x);
+    }
+    return array[n];
+}
+
+// console.log(lucasNumberIter(5));
+
+function sumArray(array){
+    // let length = array.length - 1;
+    // if(length < 0) return 0;
+    // let element = array.shift();
+    // return element + sumArray(array);
+   
+    if(array.length < 1) return 0;
+   
+    return array[0] + sumArray(array.slice(1));
+    
+}
+
+console.log(sumArray([1,2,3]));
