@@ -151,4 +151,18 @@ const factorialNew = memoize(
     }
 );
 
-console.log(factorialNew(5));
+// console.log(factorialNew(5));
+
+
+// lucas number are 2,1,3,4,7,11,18......
+function lucasNumber(n){
+    let memo = {};
+    if(n in memo) return memo[n];
+    if(n === 0) return 2;
+    if(n === 1) return 1;
+    const result =  lucasNumber(n - 1) + lucasNumber(n-2);
+    memo[n] = result;
+    return result;
+}
+
+console.log(lucasNumber(5));
