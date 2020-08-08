@@ -195,8 +195,34 @@ function sumArray(array){
 // console.log(sumArray([1,2,3]));
 
 function reverseString(string){
-    if(string.length === 0) return '';
+    if(string.length < 1) return '';
     return string[string.length -1] + reverseString( string.slice(0, string.length -1));
 }
 
-console.log(reverseString('ram'));
+// console.log(reverseString('ram'));
+
+function power(base, exponent){
+    let cache = {};
+    if(exponent < 0){
+        let ans = power(base, -exponent);
+        return 1/ans;
+    }
+    if(exponent === 0) return 1;
+    const result =  base * power(base, exponent -1);
+    cache[`${base}and${exponent}`] = result;
+    return result;
+
+}
+
+// console.log(power(3,4));
+
+function flattenArray(arr){
+    if(!Array.isArray(arr)) return [arr];
+    let flattenedArray = [];
+    arr.forEach((ele) =>{
+        let el = flattenArray(ele);
+        flattenedArray.push(...el);
+    });
+    return flattenedArray;
+}
+// console.log(flattenArray([1,2,[3,4],[5,6,[7,8,[9]]]]));
