@@ -109,17 +109,16 @@ function joinElementsIterative(array, joinElements){
 }
 //  console.log(joinElementsIterative(['s','cr','t','cod',':) :)'], 'e'));
 
-function factorialRecursive(n){
-    let chache = {};
+function factorialRecursive(n, chache = {}){
     if(n in chache){
         return chache[n];
     }else{
         if(n <= 1) {
             return 1;
         }else{
-            let result = n * factorialRecursive(n - 1);
-            chache[n] = result;
-            return result;
+            chache[n] =  n * factorialRecursive(n - 1,cache);
+           
+            return chache[n];
         }
     }
 }
@@ -155,17 +154,16 @@ const factorialNew = memoize(
 
 
 // lucas number are 2,1,3,4,7,11,18......
-function lucasNumber(n){
-    let memo = {};
+function lucasNumber(n, memo = {}){
     if(n in memo) return memo[n];
     if(n === 0) return 2;
     if(n === 1) return 1;
-    const result =  lucasNumber(n - 1) + lucasNumber(n-2);
+    const result =  lucasNumber(n - 1,memo) + lucasNumber(n-2, memo);
     memo[n] = result;
     return result;
 }
 
-// console.log(lucasNumber(5));
+//  console.log(lucasNumber(42));
 
 function lucasNumberIter(n){
     let array = [2,1];
@@ -201,14 +199,14 @@ function reverseString(string){
 
 // console.log(reverseString('ram'));
 
-function power(base, exponent){
-    let cache = {};
+function power(base, exponent, cache = {}){
+    if (cache[`${base}and${exponent}`]) return cache[`${base}and${exponent}`];
     if(exponent < 0){
-        let ans = power(base, -exponent);
+        let ans = power(base, -exponent, cache);
         return 1/ans;
     }
     if(exponent === 0) return 1;
-    const result =  base * power(base, exponent -1);
+    const result = base * power(base, exponent - 1, cache);
     cache[`${base}and${exponent}`] = result;
     return result;
 
@@ -248,3 +246,20 @@ function pathFinder(directives, targetFiles){
     }
     return null;
 }
+
+function minChange(coins, amount, memo={}){
+    if (amount in memo) return memo[amount];
+    if(amount === 0) return 0;
+    let result = [];
+    
+    coins.forEach((coin)=>{
+        if(amount >= coin){
+          result.push(minChange(coins, amount - coin, memo) + 1);
+            console.log(result);
+        }
+    });
+    memo[amount] = Math.min(...result);
+    return memo[amount];
+}
+
+console.log(minChange([1,10,25], 100));
