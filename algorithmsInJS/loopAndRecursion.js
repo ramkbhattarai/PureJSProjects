@@ -255,11 +255,11 @@ function minChange(coins, amount, memo={}){
     coins.forEach((coin)=>{
         if(amount >= coin){
           result.push(minChange(coins, amount - coin, memo) + 1);
-            console.log(result);
+            // console.log(result);
         }
     });
     memo[amount] = Math.min(...result);
     return memo[amount];
 }
 
-console.log(minChange([1,10,25], 100));
+// console.log(minChange([1,10,25], 100));
