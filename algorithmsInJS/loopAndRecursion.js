@@ -283,7 +283,7 @@ function wordBreak(word, dictionary){
     let table = new Array(word.length + 1).fill(false);
     table[0] = true;
     for (let index = 0; index < table.length; index++) {
-        if(table[index] === false) continue;
+        if(table[index] === false) continue; // if there's false we can't break the string so choose next
         for (let j = i + 1; j < table.length; j++) {
             let string = word.slice(i,j);
             if (dictionary.includes(string)) {
@@ -296,3 +296,20 @@ function wordBreak(word, dictionary){
     }
     return table[table.length - 1];
 }
+
+function steps(nums){
+    let table = new Array(nums.length).fill(false);
+    table[0]= true;
+    for (let index = 0; index < table.length; index++) {
+        if(table[index] == 0){
+
+            let maxRange = nums[index];
+             for(let i = 1; i<=maxRange;i++){
+                table[i+index] = true;
+             }
+        }
+    }
+    return table[table.length -1];
+}
+
+console.log(steps([3,1,0,5,10]))
