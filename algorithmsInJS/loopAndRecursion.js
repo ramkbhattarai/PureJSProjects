@@ -301,15 +301,16 @@ function steps(nums){
     let table = new Array(nums.length).fill(false);
     table[0]= true;
     for (let index = 0; index < table.length; index++) {
-        if(table[index] == 0){
+        if(table[index] === true){
 
             let maxRange = nums[index];
              for(let i = 1; i<=maxRange;i++){
-                table[i+index] = true;
+                table[i] = true;
              }
         }
     }
+    // console.log(table)
     return table[table.length -1];
 }
 
-console.log(steps([3,1,0,5,10]))
+// console.log(steps([2,3,1,1,0,4,7,8]))
