@@ -305,7 +305,7 @@ function steps(nums){
 
             let maxRange = nums[index];
              for(let i = 1; i<=maxRange;i++){
-                table[i] = true;
+                table[i + index] = true;
              }
         }
     }
@@ -314,3 +314,17 @@ function steps(nums){
 }
 
 // console.log(steps([2,3,1,1,0,4,7,8]))
+
+function stepper(nums, memo={}){
+    let key = nums.length;
+    if(key in memo) return memo[key];
+    if(nums.length === 0) return true;
+    let maxRange = nums[0];
+    for(let step = 1; step <= maxRange; step++){
+        if(stepper(nums.slice(step), memo)) {
+            memo[key] = true;
+            return true;}
+    }
+    memo[key] = false;
+    return false;
+}
