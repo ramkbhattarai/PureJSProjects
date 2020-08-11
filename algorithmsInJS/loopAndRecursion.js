@@ -277,3 +277,22 @@ function change(amount, coins, memo ={}){
     memo[key] = total;
     return memo[key];
 }
+
+
+function wordBreak(word, dictionary){
+    let table = new Array(word.length + 1).fill(false);
+    table[0] = true;
+    for (let index = 0; index < table.length; index++) {
+        if(table[index] === false) continue;
+        for (let j = i + 1; j < table.length; j++) {
+            let string = word.slice(i,j);
+            if (dictionary.includes(string)) {
+                table[j] = true;
+            }
+            
+        }
+       
+        
+    }
+    return table[table.length - 1];
+}
