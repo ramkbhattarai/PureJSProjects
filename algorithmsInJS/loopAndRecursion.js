@@ -328,3 +328,16 @@ function stepper(nums, memo={}){
     memo[key] = false;
     return false;
 }
+
+function nonAdjcentSum(nums){
+    if(nums.length === 0) return 0;
+    let table = new Array(nums.length).fill(0);
+    table[0] = nums[0];
+    for(let i = 1; i < table.length; i++){
+        let skippingLeftNeighbor = table[i-2] === undefined ? 0 : table[i-2];
+        let includingThisNum = skippingLeftNeighbor + nums[i];
+        let notIncludingThisNum = table[i-1];
+        table[i] = Math.max(includingThisNum, notIncludingThisNum);
+    }
+    return table[table.length -1];
+}
