@@ -341,3 +341,11 @@ function nonAdjcentSum(nums){
     }
     return table[table.length -1];
 }
+
+function nonAdjcentSumMemo(nums, memo={}){
+    if(nums.length in memo) return memo[nums.length]
+    if (nums.length === 0) return 0;
+    let firstElement = nums[0];
+   memo[nums.length] =  Math.max(firstElement + nonAdjcentSumMemo(nums.slice(2), memo), nonAdjcentSumMemo(nums.slice(1), memo));
+   return memo[nums.length]
+}
