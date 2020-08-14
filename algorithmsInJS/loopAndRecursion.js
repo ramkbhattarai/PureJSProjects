@@ -278,6 +278,21 @@ function change(amount, coins, memo ={}){
     return memo[key];
 }
 
+function minChangeWithTabulation(amount, coins){
+    let table = new Array(amount + 1).fill(Infinity);
+    table[0] = 0;
+    coins.forEach(coin => {
+        for(let amt = 0; amt < table.length; amt++){
+            for(let qty = 0; qty * coin <= amt; qty++){
+                let remainder = amt - qty * coin;
+                let attempt = table[remainder] + qty;
+                if(attempt < table[amt]) table[amt] = attempt;
+            }
+        }
+    });
+    return table[table.length -1];
+}
+
 
 function wordBreak(word, dictionary){
     let table = new Array(word.length + 1).fill(false);
