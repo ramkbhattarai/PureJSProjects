@@ -15,3 +15,20 @@ function binarySearch(array, target) {
         return true;
     }
 }
+
+function binarySearchIndex(array, target, low=0, high=array.length -1){
+    if (low === high) {
+        return -1;
+    }
+
+    let midIdx = Math.floor((low+ high) / 2);
+  
+
+    if (target < array[midIdx]) {
+        return binarySearchIndex(array, target, lo, midIdx);
+    } else if (target > array[midIdx]) {
+        return binarySearchIndex(array, target, midIdx +1, high);
+    } else {
+        return midIdx;
+    }
+}
