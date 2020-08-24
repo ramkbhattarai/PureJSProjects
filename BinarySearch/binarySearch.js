@@ -32,3 +32,23 @@ function binarySearchIndex(array, target, low=0, high=array.length -1){
         return midIdx;
     }
 }
+
+function binarySearchIter(array, target){
+    if(array.length === 0){
+        return false;
+    }
+    let low = 0;
+    let high = array.length;
+    while(low < high){
+        let midIdx = Math.floor((low + high) / 2);
+        
+        if(target < array[midIdx]){
+            high = midIdx;
+        } else if (target > array[midIdx]){
+            low = midIdx + 1;
+        }else{
+            return true;
+        }
+    }
+    return false;
+}
