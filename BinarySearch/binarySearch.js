@@ -73,4 +73,10 @@ function binarySearchIterIndex(array, target) {
     return -1;
 }
 
-console.log(binarySearchIterIndex([1,2,3,4,5], 60))
+function searchInsertPosition(array, target){
+    let index = 0;
+    while(index < array.length && target < array[index]){
+        index++;
+    }
+    return index;
+}
