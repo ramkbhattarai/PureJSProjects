@@ -52,3 +52,25 @@ function binarySearchIter(array, target){
     }
     return false;
 }
+
+function binarySearchIterIndex(array, target) {
+    if (array.length === 0) {
+        return -1;
+    }
+    let low = 0;
+    let high = array.length;
+    while (low < high) {
+        let midIdx = Math.floor((low + high) / 2);
+
+        if (target < array[midIdx]) {
+            high = midIdx;
+        } else if (target > array[midIdx]) {
+            low = midIdx + 1;
+        } else {
+            return midIdx;
+        }
+    }
+    return -1;
+}
+
+console.log(binarySearchIterIndex([1,2,3,4,5], 60))
