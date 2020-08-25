@@ -80,3 +80,36 @@ function searchInsertPosition(array, target){
     }
     return index;
 }
+
+function searchInRotatedSortedArray(array, target){
+    if (array.length === 0) {
+        return -1;
+    }
+    let low = 0;
+    let high = array.length -1;
+    while (low < high) {
+        let midIdx = Math.floor((low + high) / 2);
+
+        if (target === array[midIdx]) {
+            return midIdx;
+        }
+         if (array[low] <= array[midIdx]) {
+             if (array[low] <= target && target < array[midIdx]){
+
+                 high = midIdx - 1;
+             }else{
+                 low = midIdx + 1;
+             }
+        } else {
+             if (array[high] >= target && target > array[midIdx]) {
+                 low = midIdx + 1;
+                 
+             } else {
+                 high = midIdx - 1;
+             }
+        }
+    }
+    return array[low] === target ? low : -1;
+}
+
+console.log(searchInRotatedSortedArray([5,1,3],3))
