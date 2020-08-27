@@ -112,4 +112,17 @@ function searchInRotatedSortedArray(array, target){
     return array[low] === target ? low : -1;
 }
 
-console.log(searchInRotatedSortedArray([5,1,3],3))
+function intersection (nums1, nums2) {
+    const num1Set = new Set(nums1);
+    const num2Set = new Set(nums2);
+
+    const result = [];
+
+    for (var value of num1Set) {
+        if (num2Set.has(value)) {
+            result.push(value);
+        }
+    }
+
+    return result;
+};
