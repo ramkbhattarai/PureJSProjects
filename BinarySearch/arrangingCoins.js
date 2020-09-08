@@ -28,16 +28,16 @@ The coins can form the following rows:
 Because the 4th row is incomplete, we return 3.
  */
 
-var arrangeCoins = function (n) {
+let arrangeCoins = function (n) {
     let left = 0;
     let right = n;
     let k;
-    let current;
+    let curr;
     while (left <= right) {
         k = left + (right - left) / 2;
         curr = k * (k + 1) / 2;
 
-        if (curr == n) return (int)k;
+        if (curr === n) return k;
 
         if (n < curr) {
             right = k - 1;
@@ -47,3 +47,10 @@ var arrangeCoins = function (n) {
     }
     return right;
 };
+
+ function arrangeCoins2(n) {
+    return Math.floor((Math.sqrt(2 * n + 0.25) - 0.5));
+};
+// console.log(arrangeCoins2(8));
+
+
